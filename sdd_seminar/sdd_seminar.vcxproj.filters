@@ -21,5 +21,13 @@
     <ClCompile Include="seminar2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="seminar3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
