@@ -39,6 +39,7 @@ Birou CitireBirouTastatura()
 
 void AfisareBirou(Birou b)
 {
+	printf("BIROUL CERUT: \n");
 	printf("Cod: %d\n", b.cod);
 	printf("Material: %s\n", b.material);
 	for (int i = 0; i < 3; i++)
@@ -48,10 +49,23 @@ void AfisareBirou(Birou b)
 	printf("Initiala culoare: %c\n", b.initialaCuloare);
 }
 
+float calculeazaArieBlat(Birou b)
+{
+	float arieBlat = 1;
+	for (int i = 0; i < 2; i++)
+	{
+		arieBlat *= b.dimensiuni[i];
+	}
+
+	return arieBlat;
+}
+
 int main()
 {
 	Birou b1 = CitireBirouTastatura();
 	AfisareBirou(b1);
+	float arieBlat = calculeazaArieBlat(b1);
+	printf(" Aria blatului pt b1: %.2f", arieBlat);
 	return 0;
 }
 
