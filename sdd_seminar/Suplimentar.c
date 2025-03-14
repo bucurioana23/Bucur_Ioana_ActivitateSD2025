@@ -37,9 +37,21 @@ Birou CitireBirouTastatura()
 	return b;
 }
 
+void AfisareBirou(Birou b)
+{
+	printf("Cod: %d\n", b.cod);
+	printf("Material: %s\n", b.material);
+	for (int i = 0; i < 3; i++)
+	{
+		printf("Dimensiunea %d: %.2f\n", i, b.dimensiuni[i]);
+	}
+	printf("Initiala culoare: %c\n", b.initialaCuloare);
+}
+
 int main()
 {
 	Birou b1 = CitireBirouTastatura();
+	AfisareBirou(b1);
 	return 0;
 }
 
