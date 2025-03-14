@@ -37,6 +37,27 @@ Birou CitireBirouTastatura()
 	return b;
 }
 
+Birou initializare(int cod, const char* material, float dimensiuni[3], char initialaCuloare)
+{
+	Birou b;
+	b.cod = cod;
+	if (material != NULL)
+	{
+		b.material = malloc(strlen(material) + 1);
+		strcpy_s(b.material, strlen(material) + 1, material);
+	}
+	else
+	{
+		b.material = NULL;
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		b.dimensiuni[i] = dimensiuni[i];
+	}
+	b.initialaCuloare = initialaCuloare;
+	return b;
+}
+
 void AfisareBirou(Birou b)
 {
 	printf("BIROUL CERUT: \n");
@@ -62,7 +83,11 @@ float calculeazaArieBlat(Birou b)
 
 int main()
 {
-	Birou b1 = CitireBirouTastatura();
+	//Birou b1 = CitireBirouTastatura();
+	char* material = malloc(strlen("lemn") + 1);
+	strcpy_s(material, strlen("lemn") + 1, "lemn");
+	float dimensiuni[3] = { 120,30,70 };
+	Birou b1 = initializare(12, material, dimensiuni, 'a');
 	AfisareBirou(b1);
 	float arieBlat = calculeazaArieBlat(b1);
 	printf(" Aria blatului pt b1: %.2f", arieBlat);
