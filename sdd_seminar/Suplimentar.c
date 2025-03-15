@@ -70,6 +70,14 @@ void AfisareBirou(Birou b)
 	printf("Initiala culoare: %c\n", b.initialaCuloare);
 }
 
+void AfisareVectorBirouri(Birou* vector, int numarBirouri)
+{
+	for (int i = 0; i < numarBirouri; i++)
+	{
+		AfisareBirou(vector[i]);
+	}
+}
+
 void modificaMaterial(Birou* b, const char* material)
 {
 	if (strlen(material)>=3)
@@ -109,6 +117,20 @@ int main()
 	strcpy_s(materialNou, strlen("metal") + 1, "metal");
 	modificaMaterial(&b1, materialNou);
 	AfisareBirou(b1);
+	Birou b2 = CitireBirouTastatura();
+	Birou b3 = CitireBirouTastatura();
+	Birou b4 = CitireBirouTastatura();
+	Birou b5 = CitireBirouTastatura();
+
+	Birou* vectorBirouri = malloc(sizeof(Birou) * 5);
+	vectorBirouri[0] = b1;
+	vectorBirouri[1] = b2;
+	vectorBirouri[2] = b3;
+	vectorBirouri[3] = b4;
+	vectorBirouri[4] = b5;
+
+	printf("\n Afisare vector birouri: \n");
+	AfisareVectorBirouri(vectorBirouri,5);
 	return 0;
 }
 
