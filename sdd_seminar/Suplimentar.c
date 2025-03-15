@@ -70,6 +70,19 @@ void AfisareBirou(Birou b)
 	printf("Initiala culoare: %c\n", b.initialaCuloare);
 }
 
+void modificaMaterial(Birou* b, const char* material)
+{
+	if (strlen(material)>=3)
+	{
+		if (b->material != NULL)
+		{
+			free(b->material);
+		}
+		b->material = malloc(strlen(material) + 1);
+		strcpy_s(b->material, strlen(material) + 1, material);
+	}
+}
+
 float calculeazaArieBlat(Birou b)
 {
 	float arieBlat = 1;
@@ -91,6 +104,11 @@ int main()
 	AfisareBirou(b1);
 	float arieBlat = calculeazaArieBlat(b1);
 	printf(" Aria blatului pt b1: %.2f", arieBlat);
+
+	char* materialNou = malloc(strlen("metal") + 1);
+	strcpy_s(materialNou, strlen("metal") + 1, "metal");
+	modificaMaterial(&b1, materialNou);
+	AfisareBirou(b1);
 	return 0;
 }
 
