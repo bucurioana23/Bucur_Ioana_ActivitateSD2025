@@ -20,7 +20,7 @@ typedef struct StructuraMasina Masina;
 struct Nod
 {
 	Masina info;
-	Nod* next;
+	struct Nod* next;
 };
 typedef struct Nod Nod;
 
@@ -63,18 +63,43 @@ void afisareListaMasini(Nod* nod) {
 	}
 }
 
-void adaugaMasinaInLista(/*lista de masini*/ Masina masinaNoua) {
+void adaugaMasinaInLista(Masina masinaNoua, Nod** lista) {
 	//adauga la final in lista primita o noua masina pe care o primim ca parametru
+	Nod* nodNou = malloc(sizeof(Nod));
+	nodNou->info = masinaNoua;
+	nodNou->next = NULL;
+
+	if ((*lista) == NULL)
+	{
+		(*lista) = nodNou;
+	}
+	else
+	{
+		Nod* aux = (*lista);
+		while (aux->next)
+		{
+			aux = aux->next;
+		}
+		aux->next = nodNou;
+	}
+	
 }
 
 void adaugaLaInceputInLista(/*lista de masini*/ Masina masinaNoua) {
 	//adauga la inceputul listei o noua masina pe care o primim ca parametru
 }
 
-void* citireListaMasiniDinFisier(const char* numeFisier) {
-	//functia primeste numele fisierului, il deschide si citeste toate masinile din fisier
-	//prin apelul repetat al functiei citireMasinaDinFisier()
-	//ATENTIE - la final inchidem fisierul/stream-ul
+Nod* citireListaMasiniDinFisier(const char* numeFisier) {
+	
+	FILE* f = fopen(numeFisier, "r");
+	Nod* lista = NULL;
+	while (!feof(f))
+	{
+		Masina m = citireMasinaDinFisier(f);
+		adaugaMasinaInLista(m, &lista);
+	}
+	fclose(f);
+	return lista;
 }
 
 void dezalocareListaMasini(/*lista de masini*/) {
@@ -98,7 +123,8 @@ float calculeazaPretulMasinilorUnuiSofer(/*lista masini*/ const char* numeSofer)
 
 int main() 
 {
-
+	Nod* lista = citireListaMasiniDinFisier("masini.txt");
+	afisareListaMasini(lista);
 
 	return 0;
 }
