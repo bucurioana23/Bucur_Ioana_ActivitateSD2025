@@ -137,7 +137,7 @@ void copiazaBirouriMaterialulCerutCuVectorDat(Birou* vector, int numarBirouri, c
 	}
 }
 
-//functia face acelasi lucru ca cea de mai jos doar ca aceasta creeaza un vector nou
+//functia face acelasi lucru ca cea de mai sus doar ca aceasta creeaza un vector nou
 Birou* copiazaBirouriMaterialulCerut(Birou* vector, int numarBirouri, const char* materialCerut, int* dimensiune)
 {
 	if (vector != NULL && numarBirouri > 0)
@@ -168,6 +168,56 @@ Birou* copiazaBirouriMaterialulCerut(Birou* vector, int numarBirouri, const char
 		return vectorNou;
 	}
 	return NULL;
+}
+
+void mutaBirouriDupaInitialaCuloare(Birou** vector, int* nrBirouri, char initialaCuloare,Birou** vectorNou, int* nrBirouriNou)
+{
+	if ((*vector) != NULL && (*nrBirouri) > 0)
+	{
+		if ((*vectorNou) != NULL)
+		{
+			free(*vectorNou);
+		}
+		(*nrBirouriNou) = 0;
+
+		for (int i = 0; i < *nrBirouri; i++)
+		{
+			if ((*vector)[i].initialaCuloare == initialaCuloare)
+			{
+				(*nrBirouriNou)++;
+			}
+		}
+
+		if ((*nrBirouriNou) > 0)
+		{
+			int numarVIM = (*nrBirouri) - (*nrBirouriNou);
+			Birou* vectorInitialMutat = malloc(sizeof(Birou) * numarVIM);
+			*vectorNou = malloc(sizeof(Birou) * (*nrBirouriNou));
+
+			int k = 0, j = 0;
+			for (int i = 0; i < *nrBirouri; i++)
+			{
+				if ((*vector)[i].initialaCuloare == initialaCuloare)
+				{
+					(*vectorNou)[k] = (*vector)[i];
+					k++;
+				}
+				else
+				{
+					vectorInitialMutat[j] = (*vector)[i];
+					j++;
+				}
+			}
+			
+			free(*vector);
+			*vector = vectorInitialMutat;
+			(*nrBirouri) = numarVIM;
+		}
+		else
+		{
+			(*vectorNou) = NULL;
+		}
+	}
 }
 
 int main()
@@ -204,10 +254,19 @@ int main()
 	AfisareVectorBirouri(vectorBirouri,numarElemente);
 
 	
-	int numarElementeVN;
-	Birou* vectorNou = copiazaBirouriMaterialulCerut(vectorBirouri, numarElemente, material, &numarElementeVN);
+	/*int numarElementeVN1;
+	Birou* vectorNou1 = copiazaBirouriMaterialulCerut(vectorBirouri, numarElemente, material, &numarElementeVN1);
 	printf("\nVectorul nou de birouri: \n");
-	AfisareVectorBirouri(vectorNou, numarElementeVN);
+	AfisareVectorBirouri(vectorNou1, numarElementeVN1);*/
+
+	int numarElementeVN2;
+	Birou* vectorNou2 = NULL;
+	mutaBirouriDupaInitialaCuloare(&vectorBirouri, &numarElemente, 'n', &vectorNou2, &numarElementeVN2);
+	printf("\n Afisare vector birouri initial dupa mutare care are numarul de elemente actual %d: ",numarElemente);
+	AfisareVectorBirouri(vectorBirouri, numarElemente);
+	printf("\n Afisare vector birouri nou dupa mutare care are numarul de elemente actual %d: ", numarElementeVN2);
+	AfisareVectorBirouri(vectorNou2, numarElementeVN2);
+
 	return 0;
 }
 
