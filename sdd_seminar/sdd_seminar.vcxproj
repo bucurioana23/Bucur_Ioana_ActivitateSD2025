@@ -130,10 +130,14 @@
     <ClCompile Include="seminar1.c" />
     <ClCompile Include="seminar2.c" />
     <ClCompile Include="seminar3.c" />
-    <ClCompile Include="Suplimentar.c" />
+    <ClCompile Include="seminar4.c" />
+    <ClCompile Include="Suplimentar.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt" />
+    <Text Include="..\..\..\..\..\..\Desktop\birouri.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

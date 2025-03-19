@@ -251,6 +251,7 @@ void mutaBirouriDupaInitialaCuloare(Birou** vector, int* nrBirouri, char initial
 	}
 }
 
+
 int main()
 {
 	//Birou b1 = CitireBirouTastatura();
