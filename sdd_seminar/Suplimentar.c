@@ -118,21 +118,22 @@ void copiazaBirouriMaterialulCerutCuVectorDat(Birou* vector, int numarBirouri, c
 			{
 				(*dimensiune)++;
 			}
+		}
 
-			(*vectorNou) = malloc(sizeof(Birou) * (*dimensiune));
+		(*vectorNou) = malloc(sizeof(Birou) * (*dimensiune));
 
-			int k = 0;
-			for (int i = 0; i < numarBirouri; i++)
+		int k = 0;
+		for (int i = 0; i < numarBirouri; i++)
+		{
+			if (strcmp(vector[i].material, materialCerut) == 0)
 			{
-				if (strcmp(vector[i].material, materialCerut) == 0)
-				{
-					(*vectorNou)[k] = vector[i];
-					(*vectorNou)[k].material = malloc(strlen(vector[i].material) + 1);
-					strcpy_s((*vectorNou)[k].material, strlen(vector[i].material) + 1, vector[i].material);
-					k++;
-				}
+				(*vectorNou)[k] = vector[i];
+				(*vectorNou)[k].material = malloc(strlen(vector[i].material) + 1);
+				strcpy_s((*vectorNou)[k].material, strlen(vector[i].material) + 1, vector[i].material);
+				k++;
 			}
 		}
+		
 	}
 }
 
