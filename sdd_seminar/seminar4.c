@@ -102,12 +102,55 @@ Nod* citireListaMasiniDinFisier(const char* numeFisier) {
 	return lista;
 }
 
-void dezalocareListaMasini(/*lista de masini*/) {
-	//sunt dezalocate toate masinile si lista de elemente
+void dezalocareListaMasini(Nod** lista) {
+	
+	while ((*lista) != NULL)
+	{
+		Nod* aux = (*lista);
+		free(aux->info.model);
+		free(aux->info.numeSofer);
+		(*lista) = (*lista)->next;
+		free(aux);
+	}
 }
 
-float calculeazaPretMediu(/*lista de masini*/) {
+float calculeazaPretMediu(Nod* lista) {
 	//calculeaza pretul mediu al masinilor din lista.
+	float suma = 0;
+	int contor = 0;
+	while (lista)
+	{
+		suma += lista->info.pret;
+		contor++;
+		lista = lista->next;
+	}
+
+	if (contor == 0)
+	{
+		return 0;
+	}
+
+	return suma/contor;
+}
+
+int getNrUsiMasinaScumpa(Nod* lista)
+{
+	if (lista)
+	{
+		int nrUsi = lista->info.nrUsi;
+		float pretMaxim = lista->info.pret;
+		lista = lista->next;
+		while (lista)
+		{
+			if (lista->info.pret > pretMaxim)
+			{
+				nrUsi = lista->info.nrUsi;
+				pretMaxim = lista->info.pret;
+			}
+			lista = lista->next;
+		}
+		return nrUsi;
+	}
 	return 0;
 }
 
@@ -116,15 +159,36 @@ void stergeMasiniDinSeria(/*lista masini*/ char serieCautata) {
 	//tratati situatia ca masina se afla si pe prima pozitie, si pe ultima pozitie
 }
 
-float calculeazaPretulMasinilorUnuiSofer(/*lista masini*/ const char* numeSofer) {
+float calculeazaPretulMasinilorUnuiSofer(Nod* lista, const char* numeSofer) 
+{
 	//calculeaza pretul tuturor masinilor unui sofer.
-	return 0;
+	float suma = 0;
+	int contor = 0;
+	while (lista)
+	{
+		if (strcmp(lista->info.numeSofer, numeSofer) == 0)
+		{
+			suma += lista->info.pret;
+		}
+		lista = lista->next;
+	}
+
+	return suma;
 }
 
 int main() 
 {
 	Nod* lista = citireListaMasiniDinFisier("masini.txt");
 	afisareListaMasini(lista);
+	float medie = calculeazaPretMediu(lista);
+	printf("Media este: %.2f\n", medie);
+	char* nume = malloc(strlen("Ionescu") + 1);
+	strcpy_s(nume, strlen("Ionescu") + 1, "Ionescu");
+	float sumaSofer = calculeazaPretulMasinilorUnuiSofer(lista, nume);
+	printf("Pretul masinilor lui %s este: %.2f\n",nume, sumaSofer);
+	int nrUsi = getNrUsiMasinaScumpa(lista);
+	printf("Nr usi masina cea mai scumpa: %d", nrUsi);
+	dezalocareListaMasini(&lista);
 
 	return 0;
 }
