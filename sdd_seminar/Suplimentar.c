@@ -137,6 +137,37 @@ void copiazaBirouriMaterialulCerutCuVectorDat(Birou* vector, int numarBirouri, c
 	}
 }
 
+Birou* ConcatenareDoiVectori(Birou* v1, int nr1, Birou* v2, int nr2, int* dimensiune)
+{
+	if ((v1 != NULL && nr1 > 0) || (v2 != NULL && nr2 > 0))
+	{
+		(*dimensiune) = nr1 + nr2;
+		Birou* vector = malloc(sizeof(Birou) * (*dimensiune));
+		int k = 0;
+		for (int i = 0; i < nr1; i++)
+		{
+			vector[k] = v1[i];
+			vector[k].material = malloc(strlen(v1[i].material) + 1);
+			strcpy_s(vector[k].material, strlen(v1[i].material) + 1, v1[i].material);
+			k++;
+		}
+
+		for (int i = 0; i < nr2; i++)
+		{
+			vector[k] = v2[i];
+			vector[k].material = malloc(strlen(v2[i].material) + 1);
+			strcpy_s(vector[k].material, strlen(v2[i].material) + 1, v2[i].material);
+			k++;
+		}
+
+		return vector;
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
 //functia face acelasi lucru ca cea de mai sus doar ca aceasta creeaza un vector nou
 Birou* copiazaBirouriMaterialulCerut(Birou* vector, int numarBirouri, const char* materialCerut, int* dimensiune)
 {
@@ -262,10 +293,22 @@ int main()
 	int numarElementeVN2;
 	Birou* vectorNou2 = NULL;
 	mutaBirouriDupaInitialaCuloare(&vectorBirouri, &numarElemente, 'n', &vectorNou2, &numarElementeVN2);
-	printf("\n Afisare vector birouri initial dupa mutare care are numarul de elemente actual %d: ",numarElemente);
+	printf("\n Afisare vector birouri initial dupa mutare care are numarul de elemente actual %d: \n",numarElemente);
 	AfisareVectorBirouri(vectorBirouri, numarElemente);
-	printf("\n Afisare vector birouri nou dupa mutare care are numarul de elemente actual %d: ", numarElementeVN2);
+	printf("\n Afisare vector birouri nou dupa mutare care are numarul de elemente actual %d: \n", numarElementeVN2);
 	AfisareVectorBirouri(vectorNou2, numarElementeVN2);
+
+	int dimensiuneConc =0;
+	Birou* vectorConcatenat = ConcatenareDoiVectori(vectorBirouri, numarElemente, vectorNou2, numarElementeVN2, &dimensiuneConc);
+	printf("\n Afisare vector birouri CONCATENAT care are numarul de elemente actual %d: \n", dimensiuneConc);
+	AfisareVectorBirouri(vectorConcatenat, dimensiuneConc);
+
+	modificaMaterial(&vectorConcatenat[0], material);
+	printf("\nPrimul element din vector concatenat acum : \n");
+	AfisareBirou(vectorConcatenat[0]);
+
+	printf("\nAfisare primul element din vector Birouri: \n");
+	AfisareBirou(vectorBirouri[0]);
 
 	return 0;
 }
