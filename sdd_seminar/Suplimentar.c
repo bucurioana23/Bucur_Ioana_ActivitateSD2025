@@ -106,7 +106,8 @@ float calculeazaArieBlat(Birou b)
 	return arieBlat;
 }
 
-void copiazaBirouriMaterialulCerut(Birou* vector, int numarBirouri, const char* materialCerut, Birou** vectorNou, int* dimensiune)
+
+void copiazaBirouriMaterialulCerutCuVectorDat(Birou* vector, int numarBirouri, const char* materialCerut, Birou** vectorNou, int* dimensiune)
 {
 	if (vector != NULL && numarBirouri > 0)
 	{
@@ -133,6 +134,39 @@ void copiazaBirouriMaterialulCerut(Birou* vector, int numarBirouri, const char* 
 			}
 		}
 	}
+}
+
+//functia face acelasi lucru ca cea de mai jos doar ca aceasta creeaza un vector nou
+Birou* copiazaBirouriMaterialulCerut(Birou* vector, int numarBirouri, const char* materialCerut, int* dimensiune)
+{
+	if (vector != NULL && numarBirouri > 0)
+	{
+		(*dimensiune) = 0;
+		for (int i = 0; i < numarBirouri; i++)
+		{
+			if (strcmp(vector[i].material, materialCerut) == 0)
+			{
+				(*dimensiune)++;
+			}
+		}
+
+		Birou* vectorNou = malloc(sizeof(Birou) * (*dimensiune));
+
+		int k = 0;
+		for (int i = 0; i < numarBirouri; i++)
+		{
+			if (strcmp(vector[i].material, materialCerut) == 0)
+			{
+				vectorNou[k] = vector[i];
+				vectorNou[k].material = malloc(strlen(vector[i].material) + 1);
+				strcpy_s(vectorNou[k].material, strlen(vector[i].material) + 1, vector[i].material);
+				k++;
+			}
+		}
+		
+		return vectorNou;
+	}
+	return NULL;
 }
 
 int main()
@@ -168,9 +202,9 @@ int main()
 	printf("\n Afisare vector birouri: \n");
 	AfisareVectorBirouri(vectorBirouri,numarElemente);
 
-	Birou* vectorNou;
+	
 	int numarElementeVN;
-	copiazaBirouriMaterialulCerut(vectorBirouri, numarElemente, material, &vectorNou, &numarElementeVN);
+	Birou* vectorNou = copiazaBirouriMaterialulCerut(vectorBirouri, numarElemente, material, &numarElementeVN);
 	printf("\nVectorul nou de birouri: \n");
 	AfisareVectorBirouri(vectorNou, numarElementeVN);
 	return 0;
