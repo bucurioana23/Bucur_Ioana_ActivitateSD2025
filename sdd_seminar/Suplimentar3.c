@@ -134,19 +134,6 @@ void ScrieVectorBirouriInFisierText(const char* numeFisier, Birou* birouri, int 
 	fclose(f);
 }
 
-void dezalocare(Birou** birouri, int* nrBirouri)
-{
-	if (birouri != NULL && nrBirouri > 0)
-	{
-		for(int i=0;i<nrBirouri;i++)
-		{
-			free((*birouri)->material);
-		}
-		free(*birouri);
-		(*birouri) = NULL;
-		(*nrBirouri) = 0;
-	}
-}
 
 int main()
 {
@@ -158,7 +145,6 @@ int main()
 	//Birou b1 = initializare(32, "lemn", dimb1, 'n');
 	//ScrieBirouInFisierText("birouri.txt", b1);
 	//ScrieVectorBirouriInFisierText("birouriScrise.txt", birouri, nrBirouri);
-	dezalocare(birouri, nrBirouri);
 
 	return 0;
 }
