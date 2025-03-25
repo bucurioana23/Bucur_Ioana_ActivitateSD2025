@@ -41,5 +41,8 @@
     <Text Include="birouri.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="birouriScrise.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

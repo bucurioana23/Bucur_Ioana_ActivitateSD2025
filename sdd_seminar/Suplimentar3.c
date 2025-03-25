@@ -104,9 +104,9 @@ Birou initializare(int cod, const char* material, float dimensiuni[3], char init
 	return b;
 }
 
-void ScrieBirouInFisierText(const char* numeFisier, Birou b)
+void ScrieBirouInFisierText(FILE* f, Birou b)
 {
-	FILE* f = fopen(numeFisier, "a");
+	
 	fseek(f, 0, SEEK_END);
 
 	if (ftell(f) > 0)
@@ -124,17 +124,41 @@ void ScrieBirouInFisierText(const char* numeFisier, Birou b)
 
 }
 
+void ScrieVectorBirouriInFisierText(const char* numeFisier, Birou* birouri, int nrBirouri)
+{
+	FILE* f = fopen(numeFisier, "a");
+	for (int i = 0; i < nrBirouri; i++)
+	{
+		ScrieBirouInFisierText(f, birouri[i]);
+	}
+	fclose(f);
+}
+
+void dezalocare(Birou** birouri, int* nrBirouri)
+{
+	if (birouri != NULL && nrBirouri > 0)
+	{
+		for(int i=0;i<nrBirouri;i++)
+		{
+			free((*birouri)->material);
+		}
+		free(*birouri);
+		(*birouri) = NULL;
+		(*nrBirouri) = 0;
+	}
+}
+
 int main()
 {
 	Birou* birouri = NULL;
 	int nrBirouri = 0;
 	birouri = CitireVectorBirouriDinFisier("birouri.txt", &nrBirouri);
 	AfisareVectorBirouri(birouri, nrBirouri);
-	float dimb1[3] = { 140, 60, 70};
-	Birou b1 = initializare(32, "lemn", dimb1, 'n');
-	ScrieBirouInFisierText("birouri.txt", b1);
-	
-	
+	//float dimb1[3] = { 140, 60, 70};
+	//Birou b1 = initializare(32, "lemn", dimb1, 'n');
+	//ScrieBirouInFisierText("birouri.txt", b1);
+	//ScrieVectorBirouriInFisierText("birouriScrise.txt", birouri, nrBirouri);
+	dezalocare(birouri, nrBirouri);
 
 	return 0;
 }
