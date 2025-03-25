@@ -38,7 +38,7 @@
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
       <Filter>Source Files</Filter>
     </Text>
-    <Text Include="..\..\..\..\..\..\Desktop\birouri.txt">
+    <Text Include="birouri.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

@@ -140,7 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt" />
-    <Text Include="..\..\..\..\..\..\Desktop\birouri.txt" />
+    <Text Include="birouri.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

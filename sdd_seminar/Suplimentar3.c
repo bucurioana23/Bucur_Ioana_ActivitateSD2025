@@ -81,12 +81,60 @@ Birou* CitireVectorBirouriDinFisier(const char* numeFisier, int* nrBirouriCitite
 	return birouri;
 }
 
+//adauga un obiect intr-un fisier text
+
+Birou initializare(int cod, const char* material, float dimensiuni[3], char initialaCuloare)
+{
+	Birou b;
+	b.cod = cod;
+	if (material != NULL)
+	{
+		b.material = malloc(strlen(material) + 1);
+		strcpy_s(b.material, strlen(material) + 1, material);
+	}
+	else
+	{
+		b.material = NULL;
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		b.dimensiuni[i] = dimensiuni[i];
+	}
+	b.initialaCuloare = initialaCuloare;
+	return b;
+}
+
+void ScrieBirouInFisierText(const char* numeFisier, Birou b)
+{
+	FILE* f = fopen(numeFisier, "a");
+	fseek(f, 0, SEEK_END);
+
+	if (ftell(f) > 0)
+	{
+		fprintf(f, "\n");
+	}
+
+	fprintf(f, "%d,", b.cod);
+	fprintf(f, "%s,", b.material);
+	for (int i = 0; i < 3; i++)
+	{
+		fprintf(f, "%.2f,", b.dimensiuni[i]);
+	}
+	fprintf(f, "%c", b.initialaCuloare);
+
+}
+
 int main()
 {
 	Birou* birouri = NULL;
 	int nrBirouri = 0;
 	birouri = CitireVectorBirouriDinFisier("birouri.txt", &nrBirouri);
 	AfisareVectorBirouri(birouri, nrBirouri);
+	float dimb1[3] = { 140, 60, 70};
+	Birou b1 = initializare(32, "lemn", dimb1, 'n');
+	ScrieBirouInFisierText("birouri.txt", b1);
+	
+	
 
 	return 0;
 }
