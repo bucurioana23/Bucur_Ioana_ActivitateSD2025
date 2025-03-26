@@ -71,7 +71,7 @@ Masina citireMasinaDinFisier(FILE* file) {
 	m1.numeSofer = malloc(strlen(aux) + 1);
 	strcpy_s(m1.numeSofer, strlen(aux) + 1, aux);
 
-	m1.serie = *strtok(NULL, sep);
+	m1.serie = strtok(NULL, sep)[0];
 	return m1;
 }
 
@@ -191,13 +191,48 @@ int getNrUsiMasinaScumpa(Nod* lista)
 void stergeMasiniDinSeria(Nod** lista, char serieCautata) {
 	//sterge toate masinile din lista care au seria primita ca parametru.
 	//tratati situatia ca masina se afla si pe prima pozitie, si pe ultima pozitie
-	Nod* aux = (*lista);
-
-	
-	while ((*lista) && (serieCautata != (*lista)->info.serie))
+	while ((*lista) && (serieCautata == (*lista)->info.serie))
 	{
-		aux = (*lista);
+		Nod* aux = (*lista);
 		*lista = (*lista)->next;
+		if (aux->info.numeSofer)
+		{
+			free(aux->info.numeSofer);
+		}
+		if (aux->info.model)
+		{
+			free(aux->info.model);
+		}
+		free(aux);
+	}
+
+	if ((*lista))
+	{
+		Nod* p = (*lista);
+		while (p)
+		{
+			while (p->next && p->next->info.serie != serieCautata)
+			{
+				p = p->next;
+			}
+			if (p->next)
+			{
+				Nod* aux = p->next;
+				p->next = aux->next;
+				if (aux->info.numeSofer)
+				{
+					free(aux->info.numeSofer);
+				}
+				if (aux->info.model)
+				{
+					free(aux->info.model);
+				}
+			}
+			else
+			{
+				p = NULL;
+			}
+		}
 	}
 	
 }
@@ -228,6 +263,14 @@ int main()
 	Masina masinaNoua = initializare(0,4,12000,"Tucson","Florin",'H');
 	adaugaLaInceputInLista(&lista, masinaNoua);
 	printf("Lista dupa modificare: \n");
+	afisareListaMasini(lista);
+
+	printf("Lista fara seria A: \n");
+	stergeMasiniDinSeria(&lista, 'A');
+	afisareListaMasini(lista);
+
+	printf("Lista fara seria B: \n");
+	stergeMasiniDinSeria(&lista, 'B');
 	afisareListaMasini(lista);
 
 	//float medie = calculeazaPretMediu(lista);
