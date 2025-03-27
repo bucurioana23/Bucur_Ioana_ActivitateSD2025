@@ -150,6 +150,21 @@ void AfisareMatrice(Birou** matrice, int nr_linii, int* nr_coloane)
 	}
 }
 
+//void dezalocareMatrice(struct Masina*** matrice, int nrLinii, int** nrCol) {
+//	
+//	for (int i = 0; i < nrLinii; i++) {
+//		for (int j = 0; j < (*nrCol)[i]; j++) {
+//			free((*matrice)[i][j].material);
+//			(*matrice)[i][j].material = NULL; 
+//		}
+//		free((*matrice)[i]);
+//	}
+//	free((*nrCol));
+//	(*nrCol) = NULL;
+//	free((*matrice));
+//	(*matrice) = NULL;
+//}
+
 
 int main()
 {
@@ -167,7 +182,15 @@ int main()
 		nr_coloane[i] = 0;
 	}
 
+	
 	MatriceInFunctieDeMaterial(matrice, nr_linii, nr_coloane, birouri, nrBirouri);
+	int nrColSort[3];
+	int min = nr_coloane[0];
+	/*for (int i = 0; i < nr_linii; i++)
+	{
+		if(min>)
+	}*/
+
 	AfisareMatrice(matrice, nr_linii, nr_coloane);
 
 	return 0;
