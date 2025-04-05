@@ -42,6 +42,9 @@
     <ClCompile Include="seminar6.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Moneda.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
