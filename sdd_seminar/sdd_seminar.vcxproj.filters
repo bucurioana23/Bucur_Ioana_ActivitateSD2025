@@ -48,6 +48,9 @@
     <ClCompile Include="Monitor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Reteta.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
