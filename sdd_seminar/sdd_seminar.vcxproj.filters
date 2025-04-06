@@ -54,6 +54,9 @@
     <ClCompile Include="BirouLD.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Serviciu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
@@ -65,5 +68,6 @@
     <Text Include="birouriScrise.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="servicii.txt" />
   </ItemGroup>
 </Project>

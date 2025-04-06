@@ -1,0 +1,8 @@
+1,Creare Cont,Rebecca,12.35,45
+2,Schimbare Anvelope,Florin,142.45,60
+3,Acordare Buletin,Mario,45.87,10
+4,Vopsit Par,Francesca,65.35,12
+5,Achizitie Carte,Rebecca,16.35,34
+6,Servire Mancare,Maria,34.35,21
+7,Pierce,Stefi,75.35,45
+8,Intretinere Blana,Loli,43.35,23
