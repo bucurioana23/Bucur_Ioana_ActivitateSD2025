@@ -49,6 +49,15 @@ void adaugaInListaLaFinal(Nod** lista, Moneda m)
 {
 	Nod* nou = (Nod*)malloc(sizeof(Nod));
 	nou->info = m;
+	if (m.taraEmitenta != NULL)
+	{
+		nou->info.taraEmitenta = malloc(strlen(m.taraEmitenta) + 1);
+		strcpy(nou->info.taraEmitenta, m.taraEmitenta);
+	}
+	else
+	{
+		nou->info.taraEmitenta = NULL;
+	}
 	nou->next = NULL;
 
 	if ((*lista) == NULL)
@@ -204,6 +213,83 @@ void stergeMonedaIndex(Nod** lista, int index)
 	}
 }
 
+int getNumarElementeLista(Nod* lista)
+{
+	int contor = 0;
+	if (lista)
+	{
+		while (lista)
+		{
+			contor++;
+			lista = lista->next;
+		}
+		return contor;
+	}
+	return contor;
+}
+
+//void creareListaCuElementeSortateCrescatorDupaGreutate(Nod** listaNoua, Nod** listaVeche)
+//{
+//	int c = 0;
+//	while(c <= getNumarElementeLista(listaVeche))
+//	{
+//		Nod* min = (*listaVeche);
+//		Nod* aux = (*listaVeche)->next;
+//		while (aux)
+//		{
+//			if (aux->info.greutate < min->info.greutate)
+//			{
+//				min = aux;
+//			}
+//			aux = aux->next;
+//		}
+//		adaugaInListaLaFinal((*listaNoua), min->info);
+//		stergeMonedaDupaGreutate((*listaVeche), min->info.greutate);
+//		c++;
+//	}
+//}
+
+int getNumarElementeDeCopiatInVector(Nod* lista, float greutate)
+{
+	int contor = 0;
+	while (lista)
+	{
+		if (lista->info.greutate >= greutate)
+		{
+			contor++;
+		}
+		lista = lista->next;
+	}
+	return contor;
+}
+
+void afisareVectorMonede(Moneda* vector, int nrMonede)
+{
+	for (int i = 0; i < nrMonede; i++)
+	{
+		afisareMoneda(vector[i]);
+	}
+}
+
+void adaugaInVectorMonedeCuGreutateMaiMareDecatCeaData(Moneda** vector, int nrMonede, Nod* lista, float greutate)
+{
+	int k = 0;
+	while (lista)
+	{
+		if (lista->info.greutate >= greutate)
+		{
+			(*vector)[k] = lista->info;
+			if (lista->info.taraEmitenta != NULL)
+			{
+				(*vector)[k].taraEmitenta = malloc(strlen(lista->info.taraEmitenta) + 1);
+				strcpy((*vector)[k].taraEmitenta, lista->info.taraEmitenta);
+			}
+			k++;
+		}
+		lista = lista->next;
+	}
+}
+
 int main()
 {
 	Moneda m1 = initializare("Romania", 1, 0.01, 2020);
@@ -220,10 +306,25 @@ int main()
 	adaugaInListaLaFinal(&lista, m5);
 
 	afisareListaMonede(lista);
+	printf("\nNumar elemente lista: %d\n", getNumarElementeLista(lista));
 
 	Moneda m = getMonedaGreutateMaxima(lista);
 	printf("\nMoneda cu cea mai mare greutate: \n");
 	afisareMoneda(m);
+
+
+	/*Nod* listaNoua = NULL;
+	creareListaCuElementeSortateCrescatorDupaGreutate(&listaNoua, lista);
+
+	printf("\n LISTA SORTATA: \n");
+	afisareListaMonede(listaNoua);*/
+
+
+	int contor = getNumarElementeDeCopiatInVector(lista, 0.4);
+	Moneda* vector = (Moneda*)malloc(sizeof(Moneda) * contor);
+	adaugaInVectorMonedeCuGreutateMaiMareDecatCeaData(&vector, contor, lista, 0.4);
+	printf("\nAfisare vector: \n");
+	afisareVectorMonede(vector, contor);
 
 	stergeMonedaDupaGreutate(&lista, 0.12);
 
@@ -239,6 +340,15 @@ int main()
 	{
 		free(m.taraEmitenta);
 	}
+
+	for (int i = 0; i < contor; i++)
+	{
+		if (vector[i].taraEmitenta != NULL)
+		{
+			free(vector[i].taraEmitenta);
+		}
+	}
+	free(vector);
 
 	return 0;
 }
