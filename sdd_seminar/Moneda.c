@@ -76,6 +76,33 @@ void adaugaInListaLaFinal(Nod** lista, Moneda m)
 
 }
 
+void adaugaInListaLaInceput(Nod** lista, Moneda m)
+{
+	Nod* nou = (Nod*)malloc(sizeof(Nod));
+	nou->info = m;
+	if (m.taraEmitenta != NULL)
+	{
+		nou->info.taraEmitenta = malloc(strlen(m.taraEmitenta) + 1);
+		strcpy(nou->info.taraEmitenta, m.taraEmitenta);
+	}
+	else
+	{
+		nou->info.taraEmitenta = NULL;
+	}
+
+	if ((*lista) == NULL)
+	{
+		nou->next = NULL;
+		(*lista) = nou;
+	}
+	else
+	{
+		nou->next = (*lista);
+		(*lista) = nou;
+	}
+
+}
+
 void afisareListaMonede(Nod* lista)
 {
 	while (lista)
@@ -144,20 +171,24 @@ void stergeMonedaDupaGreutate(Nod** lista, float greutate)
 				{
 					p = p->next;
 				}
-				if (p->next)
+				if (p->next) 
 				{
-					Nod* aux = p->next;
-					p->next = aux->next;
-					if (aux->info.taraEmitenta != NULL)
+					if(p->next->info.greutate == greutate)
 					{
-						free(aux->info.taraEmitenta);
+						Nod* aux = p->next;
+						p->next = aux->next;
+						if (aux->info.taraEmitenta != NULL)
+						{
+							free(aux->info.taraEmitenta);
+						}
+						free(aux);
 					}
-					free(aux);
 				}
 				else
 				{
 					p = NULL;
 				}
+
 			}
 		}
 		
@@ -228,25 +259,26 @@ int getNumarElementeLista(Nod* lista)
 	return contor;
 }
 
-//void creareListaCuElementeSortateCrescatorDupaGreutate(Nod** listaNoua, Nod** listaVeche)
+//void creareListaCuElementeSortateCrescatorDupaGreutate(Nod** lista, Moneda m)
+////pp ca lista are cel putin un element
 //{
-//	int c = 0;
-//	while(c <= getNumarElementeLista(listaVeche))
+//	Nod* p = (*lista);
+//	while (p->next && p->info.greutate <= m.greutate)
 //	{
-//		Nod* min = (*listaVeche);
-//		Nod* aux = (*listaVeche)->next;
-//		while (aux)
-//		{
-//			if (aux->info.greutate < min->info.greutate)
-//			{
-//				min = aux;
-//			}
-//			aux = aux->next;
-//		}
-//		adaugaInListaLaFinal((*listaNoua), min->info);
-//		stergeMonedaDupaGreutate((*listaVeche), min->info.greutate);
-//		c++;
+//		p = p->next;
 //	}
+//	if (p->next)
+//	{
+//		Nod* nou = malloc(sizeof(Nod));
+//		nou->info = m;
+//		nou->next = p->next;
+//		p->next = nou;
+//	}
+//	else
+//	{
+//		adaugaInListaLaFinal(*lista, m);
+//	}
+//	
 //}
 
 int getNumarElementeDeCopiatInVector(Nod* lista, float greutate)
@@ -302,7 +334,7 @@ int main()
 	adaugaInListaLaFinal(&lista, m1);
 	adaugaInListaLaFinal(&lista, m2);
 	adaugaInListaLaFinal(&lista, m3);
-	adaugaInListaLaFinal(&lista, m4);
+	adaugaInListaLaInceput(&lista, m4);
 	adaugaInListaLaFinal(&lista, m5);
 
 	afisareListaMonede(lista);
@@ -326,7 +358,7 @@ int main()
 	printf("\nAfisare vector: \n");
 	afisareVectorMonede(vector, contor);
 
-	stergeMonedaDupaGreutate(&lista, 0.12);
+	stergeMonedaDupaGreutate(&lista, 0.9);
 
 	printf("\n Lista dupa stergere moneda: \n");
 	afisareListaMonede(lista);
