@@ -152,20 +152,87 @@ HashTable citireMasiniDinFisier(const char* numeFisier, int dimensiune) {
 void afisareTabelaDeMasini(HashTable ht) {
 	for (int i = 0; i < ht.dim; i++)
 	{
-		printf("\nSuntem in clusterul %d\n", i);
-		afisareListaMasini(ht.vector[i]);
+		if (ht.vector[i] != NULL)
+		{
+			printf("\nSuntem in clusterul %d\n", i);
+			afisareListaMasini(ht.vector[i]);
+		}
+		else
+		{
+			printf("\nIn clusterul %d nu avem masini!!\n", i);
+		}
 	}
 }
 
+void dezalocareListaDeMasini(Nod** lista)
+{
+	Nod* p = (*lista);
+	while (p)
+	{
+		Nod* temp = p;
+		p = p->next;
+		if (temp->info.model != NULL)
+		{
+			free(temp->info.model);
+		}
+
+		if (temp->info.numeSofer != NULL)
+		{
+			free(temp->info.numeSofer);
+		}
+
+		free(temp);
+	}
+	(*lista) = NULL;
+}
+
 void dezalocareTabelaDeMasini(HashTable *ht) {
-	//sunt dezalocate toate masinile din tabela de dispersie
+	for (int i = 0; i < ht->dim; i++)
+	{
+		dezalocareListaDeMasini(&(ht->vector[i]));
+	}
+	ht->dim = 0;
+	free(ht->vector);
+	ht->vector = NULL;
+}
+
+float pretMediuPerLista(Nod* lista)
+{
+	int suma = 0;
+	int contor = 0;
+	while (lista)
+	{
+		suma += lista->info.pret;
+		contor++;
+		lista = lista->next;
+	}
+
+	return (contor > 0 ? (suma / contor) : 0);
 }
 
 float* calculeazaPreturiMediiPerClustere(HashTable ht, int* nrClustere) {
-	//calculeaza pretul mediu al masinilor din fiecare cluster.
-	//trebuie sa returnam un vector cu valorile medii per cluster.
-	//lungimea vectorului este data de numarul de clustere care contin masini
-	return NULL;
+	float* preturi = NULL;
+	(*nrClustere) = 0;
+
+	for (int i = 0; i < ht.dim; i++)
+	{
+		if (ht.vector[i] != NULL)
+		{
+			(*nrClustere)++;
+		}
+	}
+
+	preturi = (float*)malloc(sizeof(float) * (*nrClustere));
+	int contor = 0;
+	for (int i = 0; i < ht.dim; i++)
+	{
+		if (ht.vector[i] != NULL)
+		{
+			preturi[contor] = pretMediuPerLista(ht.vector[i]);
+			contor++;
+		}
+	}
+	return preturi;
 }
 
 Masina getMasinaDupaCheie(HashTable ht , char serie) {
@@ -205,8 +272,19 @@ int main()
 	{
 		printf("Nu a fost gasita masina!");
 	}
+
+	int nrClustere = 0;
+	float* p = calculeazaPreturiMediiPerClustere(ht, &nrClustere);
+
+	printf("Preturi medii per clustere: ");
+	for (int i = 0; i < nrClustere; i++)
+	{
+		printf(" %.2f ", p[i]);
+	}
+	printf("\n");
+
 	free(m.numeSofer);
 	free(m.model);
-
+	dezalocareTabelaDeMasini(&ht);
 	return 0;
 }
