@@ -57,6 +57,9 @@
     <ClCompile Include="Serviciu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Fisier.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
