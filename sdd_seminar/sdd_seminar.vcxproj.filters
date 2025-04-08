@@ -60,6 +60,9 @@
     <ClCompile Include="Fisier.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CursaAeriana.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
@@ -71,6 +74,11 @@
     <Text Include="birouriScrise.txt">
       <Filter>Source Files</Filter>
     </Text>
-    <Text Include="servicii.txt" />
+    <Text Include="curse.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="servicii.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

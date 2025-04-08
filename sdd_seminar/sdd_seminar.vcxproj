@@ -130,7 +130,10 @@
     <ClCompile Include="BirouLD.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Fisier.c" />
+    <ClCompile Include="CursaAeriana.c" />
+    <ClCompile Include="Fisier.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Moneda.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -169,6 +172,7 @@
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt" />
     <Text Include="birouri.txt" />
     <Text Include="birouriScrise.txt" />
+    <Text Include="curse.txt" />
     <Text Include="servicii.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
