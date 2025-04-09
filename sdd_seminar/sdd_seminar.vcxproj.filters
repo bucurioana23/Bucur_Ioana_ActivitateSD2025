@@ -63,6 +63,9 @@
     <ClCompile Include="CursaAeriana.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MonedaLDI.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
