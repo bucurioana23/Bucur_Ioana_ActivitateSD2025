@@ -66,6 +66,9 @@
     <ClCompile Include="MonedaLDI.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="seminar8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
@@ -81,6 +84,9 @@
       <Filter>Source Files</Filter>
     </Text>
     <Text Include="servicii.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="masini_arbore.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
