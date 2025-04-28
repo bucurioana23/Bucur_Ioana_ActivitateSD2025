@@ -108,6 +108,26 @@ void afisareInOrdine(Nod* arbore) //SRD - INORDINE
 	}
 }
 
+void afisarePreOrdine(Nod* arbore) //SRD - INORDINE
+{
+	if (arbore)
+	{
+		afisareMasina(arbore->info); // R
+		afisarePreOrdine(arbore->st); // S
+		afisarePreOrdine(arbore->dr); // D
+	}
+}
+
+void afisarePostOrdine(Nod* arbore) //SRD - INORDINE
+{
+	if (arbore)
+	{
+		afisarePreOrdine(arbore->st); // S
+		afisarePreOrdine(arbore->dr); // D
+		afisareMasina(arbore->info); // R
+	}
+}
+
 void dezalocareArboreDeMasini(/*arbore de masini*/) {
 	//sunt dezalocate toate masinile si arborele de elemente
 }
@@ -141,7 +161,7 @@ float calculeazaPretulMasinilorUnuiSofer(/*arbore de masini*/ const char* numeSo
 
 int main() {
 	Nod* radacina = citireArboreDeMasiniDinFisier("masini_arbore.txt");
-	afisareInOrdine(radacina);
+	afisarePreOrdine(radacina);
 
 	return 0;
 }
