@@ -128,12 +128,43 @@ void afisarePostOrdine(Nod* arbore) //SRD - INORDINE
 	}
 }
 
-void dezalocareArboreDeMasini(/*arbore de masini*/) {
-	//sunt dezalocate toate masinile si arborele de elemente
+void dezalocareArboreDeMasini(Nod** arbore) {
+	if ((*arbore))
+	{
+		dezalocareArboreDeMasini(&((*arbore)->st));
+		dezalocareArboreDeMasini(&((*arbore)->dr));
+		if ((*arbore)->info.numeSofer != NULL)
+		{
+			free((*arbore)->info.numeSofer);
+		}
+		if ((*arbore)->info.model != NULL)
+		{
+			free((*arbore)->info.model);
+		}
+		free(*arbore);
+		(*arbore) = NULL;
+	}
 }
 
-Masina getMasinaByID(/*arborele de masini*/int id) {
+Masina getMasinaByID(Nod* arbore, int id) 
+{
 	Masina m;
+	m.id = -1;
+	if (arbore)
+	{
+		if (arbore->info.id < id)
+		{
+			return getMasinaByID(arbore->dr, id);
+		}
+		else if (arbore->info.id > id)
+		{
+			return getMasinaByID(arbore->st, id);
+		}
+		else
+		{
+			return arbore->info;
+		}
+	}
 
 	return m;
 }
@@ -149,9 +180,23 @@ int calculeazaInaltimeArbore(/*arbore de masini*/) {
 	return 0;
 }
 
-float calculeazaPretTotal(/*arbore de masini*/) {
-	//calculeaza pretul tuturor masinilor din arbore.
-	return 0;
+void calculeazaPretTotal1(Nod* arbore, float* suma) {
+
+	if (arbore)
+	{
+		calculeazaPretTotal(arbore->st, suma);
+		calculeazaPretTotal(arbore->dr, suma);
+		(*suma) += arbore->info.pret;
+	}
+}
+
+float calculeazaPretTotal(Nod* arbore) {
+	if (arbore == NULL)
+		return 0;
+
+	float totalStanga = calculeazaPretTotal(arbore->st);
+	float totalDreapta = calculeazaPretTotal(arbore->dr);
+	return arbore->info.pret + totalStanga + totalDreapta;
 }
 
 float calculeazaPretulMasinilorUnuiSofer(/*arbore de masini*/ const char* numeSofer) {
@@ -163,5 +208,17 @@ int main() {
 	Nod* radacina = citireArboreDeMasiniDinFisier("masini_arbore.txt");
 	afisarePreOrdine(radacina);
 
+	Masina m = getMasinaByID(radacina, 7);
+	printf("\nMasina cautata: \n");
+	afisareMasina(m);
+
+	float suma1 = 0;
+	calculeazaPretTotal1(radacina,&suma1);
+	printf("\nSuma 1 totala preturi: %.2f",suma1);
+
+	float suma = calculeazaPretTotal(radacina);
+	printf("\nSuma totala preturi: %.2f", suma);
+
+	dezalocareArboreDeMasini(&radacina);
 	return 0;
 }
