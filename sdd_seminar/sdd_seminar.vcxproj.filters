@@ -69,6 +69,9 @@
     <ClCompile Include="seminar8.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="seminar9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
