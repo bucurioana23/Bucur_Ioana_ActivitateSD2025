@@ -184,8 +184,8 @@ void calculeazaPretTotal1(Nod* arbore, float* suma) {
 
 	if (arbore)
 	{
-		calculeazaPretTotal(arbore->st, suma);
-		calculeazaPretTotal(arbore->dr, suma);
+		calculeazaPretTotal1(arbore->st, suma);
+		calculeazaPretTotal1(arbore->dr, suma);
 		(*suma) += arbore->info.pret;
 	}
 }
