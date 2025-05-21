@@ -152,7 +152,10 @@
     <ClCompile Include="seminar10.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="seminar11.c" />
+    <ClCompile Include="seminar11.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="seminar12.c" />
     <ClCompile Include="seminar2.c" />
     <ClCompile Include="seminar3.c" />
     <ClCompile Include="seminar4.c">
@@ -189,6 +192,7 @@
     <Text Include="birouriScrise.txt" />
     <Text Include="curse.txt" />
     <Text Include="masini_arbore.txt" />
+    <Text Include="muchii.txt" />
     <Text Include="servicii.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
