@@ -81,6 +81,9 @@
     <ClCompile Include="seminar12.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CompetitorHeap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
@@ -102,6 +105,9 @@
       <Filter>Source Files</Filter>
     </Text>
     <Text Include="muchii.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="competitori.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

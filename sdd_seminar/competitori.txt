@@ -1,0 +1,10 @@
+Andrei Popescu,87.5,5,Romania  
+Maria Ionescu,92.3,6,Romania  
+Luca Rossi,78.0,4,Italia  
+Elena Garcia,88.2,5,Spania  
+Jonas Müller,81.7,3,Germania  
+Sofia Novak,90.1,6,Polonia  
+James Smith,85.4,4,Marea Britanie  
+Chloe Dubois,89.6,5,Franta  
+Matei Radu,76.9,3,Romania  
+Emma Svensson,91.0,6,Suedi  

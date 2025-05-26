@@ -130,6 +130,7 @@
     <ClCompile Include="BirouLD.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="CompetitorHeap.c" />
     <ClCompile Include="CursaAeriana.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -155,7 +156,9 @@
     <ClCompile Include="seminar11.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="seminar12.c" />
+    <ClCompile Include="seminar12.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="seminar2.c" />
     <ClCompile Include="seminar3.c" />
     <ClCompile Include="seminar4.c">
@@ -190,6 +193,7 @@
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt" />
     <Text Include="birouri.txt" />
     <Text Include="birouriScrise.txt" />
+    <Text Include="competitori.txt" />
     <Text Include="curse.txt" />
     <Text Include="masini_arbore.txt" />
     <Text Include="muchii.txt" />
