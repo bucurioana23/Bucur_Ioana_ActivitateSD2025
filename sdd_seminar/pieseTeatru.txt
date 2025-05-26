@@ -1,0 +1,9 @@
+O scrisoare pierduta,120,1884,8.5  
+Hamlet,135,1603,9.2  
+Romeo si Julieta,125,1597,9.0   
+Livada cu visini,130,1904,7.8  
+Furtuna,95,1611,8.4  
+D-ale carnavalului,100,1885,7.5  
+Steaua fara nume,105,1942,8.9  
+Zbor deasupra unui cuib de cuci,140,1975,9.1  
+Visul unei nopti de vara,115,1595,8.2 

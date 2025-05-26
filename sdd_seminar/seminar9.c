@@ -122,8 +122,8 @@ void afisarePostOrdine(Nod* arbore) //SDR - POSTORDINE
 {
 	if (arbore)
 	{
-		afisarePreOrdine(arbore->st); // S
-		afisarePreOrdine(arbore->dr); // D
+		afisarePostOrdine(arbore->st); // S
+		afisarePostOrdine(arbore->dr); // D
 		afisareMasina(arbore->info); // R
 	}
 }
