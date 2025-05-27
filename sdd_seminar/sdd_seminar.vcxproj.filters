@@ -90,6 +90,9 @@
     <ClCompile Include="ComandaABC.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ComandaCoada.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
@@ -120,6 +123,9 @@
       <Filter>Source Files</Filter>
     </Text>
     <Text Include="pieseTeatru.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="comenziCoada.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

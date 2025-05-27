@@ -1,0 +1,10 @@
+101,Ion Popescu,10,299.99
+102,Maria Ionescu,3,150.50
+103,Ion Popescu,4,410.75
+104,Elena Georgescu,5,89.90
+105,Ion Popescu,6,230.00
+106,Andrei Vasile,2,120.25
+107,Maria Ionescu,7,500.00
+108,Ion Popescu,5,340.10
+109,Elena Georgescu,1,75.35
+110,Maria Ionescu,2,199.99

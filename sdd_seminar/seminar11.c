@@ -203,7 +203,9 @@ void dezalocareCoadaDeMasini(Coada* coada) {
 
 
 //metode de procesare
-Masina getMasinaByID(/*stiva sau coada de masini*/int id);
+Masina getMasinaByID(Nod** stiva, int id) {
+
+}
 
 float calculeazaPretTotal(Nod** stiva)
 {
