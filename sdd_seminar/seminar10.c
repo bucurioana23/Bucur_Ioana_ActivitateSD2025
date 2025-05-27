@@ -20,7 +20,6 @@ struct Nod {
 	Masina info;
 	struct Nod* st;
 	struct Nod* dr;
-	int gradEchilibru;
 };
 typedef struct Nod Nod;
 
@@ -55,11 +54,28 @@ void afisareMasina(Masina masina) {
 	printf("Serie: %c\n\n", masina.serie);
 }
 
-//int calculeazaInaltimeArbore(/*arbore de masini*/) {
-//	//calculeaza inaltimea arborelui care este data de 
-//	//lungimea maxima de la radacina pana la cel mai indepartat nod frunza
-//	return 0;
-//}
+int calculeazaInaltimeArbore(Nod* arbore) {
+	if (arbore == NULL)
+	{
+		return 0;
+	}
+	else {
+		int inaltimeSt = calculeazaInaltimeArbore(arbore->st);
+		int inaltimeDr = calculeazaInaltimeArbore(arbore->dr);
+		if (inaltimeSt > inaltimeDr)
+			return 1 + inaltimeSt;
+		else return 1 + inaltimeDr;
+	}
+}
+
+int calculeazaNumarNoduri(Nod* arbore)
+{
+	if (arbore)
+	{
+		return 1 + calculeazaNumarNoduri(arbore->st) + calculeazaNumarNoduri(arbore->dr);
+	}
+	else return 0;
+}
 
 //ALTE FUNCTII NECESARE:
 // - aici veti adauga noile functii de care aveti nevoie.
@@ -69,7 +85,6 @@ void rotireStanga(Nod** arbore)
 	(*arbore)->dr = aux->st;
 	aux->st = (*arbore);
 	(*arbore) = aux;
-	(*arbore)->gradEchilibru--;
 
 }
 
@@ -79,7 +94,15 @@ void rotireDreapta(Nod** arbore) //dezechilibru in stanga
 	(*arbore)->st = aux->dr;
 	aux->dr = (*arbore);
 	(*arbore) = aux;
-	(*arbore)->gradEchilibru++;
+}
+
+int gradEchilibru(Nod* radacina) {
+	if (radacina != NULL) {
+		return(calculeazaInaltimeArbore(radacina->st) - calculeazaInaltimeArbore(radacina->dr));
+	}
+	else {
+		return 0;
+	}
 }
 
 void adaugaMasinaInArboreEchilibrat(Nod** arbore, Masina masinaNoua) {
@@ -89,7 +112,6 @@ void adaugaMasinaInArboreEchilibrat(Nod** arbore, Masina masinaNoua) {
 		nou->info = masinaNoua;
 		nou->dr = NULL;
 		nou->st = NULL;
-		nou->gradEchilibru = 0;
 		(*arbore) = nou;
 	}
 	else
@@ -97,18 +119,18 @@ void adaugaMasinaInArboreEchilibrat(Nod** arbore, Masina masinaNoua) {
 		if ((*arbore)->info.id <= masinaNoua.id)
 		{
 			adaugaMasinaInArboreEchilibrat(&((*arbore)->dr), masinaNoua);
-			(*arbore)->gradEchilibru--;
 		}
 		else //if ((*arbore)->info.id > masinaNoua.id)
 		{
 			adaugaMasinaInArboreEchilibrat(&((*arbore)->st), masinaNoua);
-			(*arbore)->gradEchilibru++;
 		}
 
-		if ((*arbore)->gradEchilibru == 2)
+		int grad = gradEchilibru((*arbore));
+
+		if (grad == 2)
 		{
 			//avem dezechilibru in stanga
-			if ((*arbore)->st->gradEchilibru == 1) //varianta simpla, au aceleasi semne, rotire la dreapta
+			if (gradEchilibru((*arbore)->st) == 1) //varianta simpla, au aceleasi semne, rotire la dreapta
 			{
 				rotireDreapta(arbore);
 			}
@@ -118,9 +140,9 @@ void adaugaMasinaInArboreEchilibrat(Nod** arbore, Masina masinaNoua) {
 				rotireDreapta(arbore);
 			}
 		}
-		else if ((*arbore)->gradEchilibru == -2) // dezechilibru in dreapta, rotire la stanga
+		else if (grad == -2) // dezechilibru in dreapta, rotire la stanga
 		{
-			if ((*arbore)->dr->gradEchilibru != -1)
+			if (gradEchilibru((*arbore)->dr) != -1)
 			{
 				rotireDreapta(&((*arbore)->dr));
 			}
@@ -151,8 +173,19 @@ void afisarePreOrdine(Nod* arbore) //SRD - INORDINE
 	}
 }
 
-void dezalocareArboreDeMasini(/*arbore de masini*/) {
-	//sunt dezalocate toate masinile si arborele de elemente
+void dezalocareArboreDeMasini(Nod** arbore) {
+	if (*arbore) {
+		dezalocareArboreDeMasini(&((*arbore)->st));
+		dezalocareArboreDeMasini(&((*arbore)->dr));
+		if ((*arbore)->info.numeSofer) {
+			free((*arbore)->info.numeSofer);
+		}
+		if ((*arbore)->info.model) {
+			free((*arbore)->info.model);
+		}
+		free(*arbore);
+		(*arbore) = NULL;
+	}
 }
 
 //Preluati urmatoarele functii din laboratorul precedent.
@@ -171,5 +204,6 @@ int main() {
 	Nod* arbore = citireArboreDeMasiniDinFisier("masini.txt");
 	afisarePreOrdine(arbore);
 
+	dezalocareArboreDeMasini(&arbore);
 	return 0;
 }
