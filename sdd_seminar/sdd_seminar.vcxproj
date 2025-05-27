@@ -130,6 +130,9 @@
     <ClCompile Include="BirouLD.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="ComandaABC.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="CompetitorHeap.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -148,7 +151,9 @@
     <ClCompile Include="Monitor.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="PiesaTeatruABC.c" />
+    <ClCompile Include="PiesaTeatruABC.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Reteta.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -196,6 +201,7 @@
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt" />
     <Text Include="birouri.txt" />
     <Text Include="birouriScrise.txt" />
+    <Text Include="comenzi.txt" />
     <Text Include="competitori.txt" />
     <Text Include="curse.txt" />
     <Text Include="masini_arbore.txt" />

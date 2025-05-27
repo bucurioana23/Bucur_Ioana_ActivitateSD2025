@@ -142,7 +142,7 @@ void adaugaMasinaInArboreEchilibrat(Nod** arbore, Masina masinaNoua) {
 		}
 		else if (grad == -2) // dezechilibru in dreapta, rotire la stanga
 		{
-			if (gradEchilibru((*arbore)->dr) != -1)
+			if (gradEchilibru((*arbore)->dr) == 1)
 			{
 				rotireDreapta(&((*arbore)->dr));
 			}

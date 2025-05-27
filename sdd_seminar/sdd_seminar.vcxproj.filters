@@ -87,6 +87,9 @@
     <ClCompile Include="PiesaTeatruABC.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ComandaABC.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\..\..\..\Downloads\masini.txt">
@@ -113,6 +116,11 @@
     <Text Include="competitori.txt">
       <Filter>Source Files</Filter>
     </Text>
-    <Text Include="pieseTeatru.txt" />
+    <Text Include="comenzi.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="pieseTeatru.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
