@@ -204,7 +204,7 @@ void calculeazaPretTotal1(Nod* arbore, float* suma) {
 
 float calculeazaPretTotal(Nod* arbore) {
 	if (arbore == NULL)
-		return 0;
+		return 0; 
 
 	float totalStanga = calculeazaPretTotal(arbore->st);
 	float totalDreapta = calculeazaPretTotal(arbore->dr);
